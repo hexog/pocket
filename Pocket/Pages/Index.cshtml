@@ -1,0 +1,27 @@
+﻿@page
+@attribute [Authorize]
+@model Pocket.Pages.IndexModel
+
+<main class="centered centered-vertical">
+
+    <h2>Create new note</h2>
+
+    <form method="post" class="pure-form pure-form-aligned">
+        <fieldset>
+            <div class="pure-control-group">
+                <label for="note-content">Note</label>
+                <textarea asp-for="NoteContent" id="note-content" required maxlength="2000"></textarea>
+            </div>
+
+            <div class="pure-control-group">
+                <label for="note-password">Password</label>
+                <input type="password" asp-for="Password" id="note-password" required minlength="4" maxlength="200">
+            </div>
+
+            <div class="pure-controls">
+                <button type="submit" class="pure-button pure-button-primary">Create</button>
+            </div>
+        </fieldset>
+    </form>
+
+</main>

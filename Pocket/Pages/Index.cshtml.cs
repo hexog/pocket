@@ -27,17 +27,7 @@ public class IndexModel : PageModel
         }
 
         var noteId = await secureNoteService.CreateSecureNote(NoteContent, Password);
-
-        var noteUri = new UriBuilder
-        {
-            Scheme = Request.Scheme,
-            Host = Request.Host.Host,
-            Port = Request.Host.Port ?? -1,
-            Path = $"s/{noteId}",
-        };
-
         passwordHistoryHandler.Append(HttpContext, noteId, Password);
-
-        return Redirect(noteUri.ToString());
+        return RedirectToPage("SecureNotes", new { noteId });
     }
 }

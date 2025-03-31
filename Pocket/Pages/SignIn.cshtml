@@ -1,22 +1,18 @@
 ﻿@page
 @model Pocket.Pages.SignIn
 
-<main class="centered centered-vertical">
+<h2>Sign in</h2>
 
-    <h2>Sign in</h2>
+<form method="post" class="pure-form pure-form-aligned">
+    <fieldset>
+        <div class="pure-control-group">
+            <label for="sign-in-token">Token</label>
+            <input type="password" asp-for="Token" id="sign-in-token" placeholder="Token" required>
+            <span asp-validation-for="Token"></span>
+        </div>
 
-    <form method="post" class="pure-form pure-form-aligned">
-        <fieldset>
-            <div class="pure-control-group">
-                <label for="sign-in-token">Token</label>
-                <input type="password" asp-for="Token" id="sign-in-token" placeholder="Token" required>
-                <span asp-validation-for="Token"></span>
-            </div>
-
-            <div class="pure-controls">
-                <button type="submit" class="pure-button pure-button-primary">Sign in</button>
-            </div>
-        </fieldset>
-    </form>
-
-</main>
+        <div class="pure-controls">
+            <button type="submit" class="pure-button pure-button-primary">Sign in</button>
+        </div>
+    </fieldset>
+</form>

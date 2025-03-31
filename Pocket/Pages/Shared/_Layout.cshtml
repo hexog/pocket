@@ -1,14 +1,34 @@
-﻿<!DOCTYPE html>
+﻿@inject IConfiguration Configuration
+
+@{
+    var repositoryUri = Configuration.GetValue<string>("RepositoryUri");
+}
+
+<!DOCTYPE html>
 <html>
 <head>
     <title>@ViewData["Title"]</title>
     <link rel="stylesheet" href="~/lib/css/pure/pure-min.css">
     <link rel="stylesheet" href="~/css/centered.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    @if (repositoryUri is not null)
+    {
+        <link rel="stylesheet" href="~/css/footer.css">
+    }
 </head>
 <body>
 
-@RenderBody()
+<main class="centered centered-vertical">
+    <div style="margin: auto">
+        @RenderBody()
+    </div>
 
+    @if (repositoryUri is not null)
+    {
+        <footer class="footer">
+            <a href="@repositoryUri">Source code</a>
+        </footer>
+    }
+</main>
 </body>
 </html>

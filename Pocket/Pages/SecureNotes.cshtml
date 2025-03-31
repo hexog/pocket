@@ -1,29 +1,25 @@
 ﻿@page "/s/{noteId}"
 @model Pocket.Pages.SecureNotesModel
 
-<main class="centered centered-vertical">
+@if (Model.NoteContent is { } noteContent)
+{
+    <div>@noteContent</div>
+}
+else
+{
+    <h2>Unlock a note</h2>
 
-    @if (Model.NoteContent is { } noteContent)
-    {
-        <div>@noteContent</div>
-    }
-    else
-    {
-        <h2>Unlock a note</h2>
+    <form method="post" class="pure-form pure-form-aligned">
+        <fieldset>
+            <div class="pure-control-group">
+                <label for="note-password">Password</label>
+                <input type="password" asp-for="Password" id="note-password" required minlength="4" maxlength="200">
+                <span asp-validation-for="Password" class="pure-form-message-inline"></span>
+            </div>
 
-        <form method="post" class="pure-form pure-form-aligned">
-            <fieldset>
-                <div class="pure-control-group">
-                    <label for="note-password">Password</label>
-                    <input type="password" asp-for="Password" id="note-password" required minlength="4" maxlength="200">
-                    <span asp-validation-for="Password" class="pure-form-message-inline"></span>
-                </div>
-
-                <div class="pure-controls">
-                    <button type="submit" class="pure-button pure-button-primary">Unlock</button>
-                </div>
-            </fieldset>
-        </form>
-    }
-
-</main>
+            <div class="pure-controls">
+                <button type="submit" class="pure-button pure-button-primary">Unlock</button>
+            </div>
+        </fieldset>
+    </form>
+}

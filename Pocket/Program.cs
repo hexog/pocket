@@ -23,9 +23,9 @@ services.AddSerilog(o => o
         outputTemplate:
         "[{Timestamp:yyyy-MM-ddTHH:mm:ss.fff zzz}] [{Level:u3}] [{SourceContext}] {Message:lj}{NewLine}{Exception}"));
 
-var connectionString = configuration.GetConnectionString("DefaultConnection");
+var connectionString = configuration.GetSection("ConnectionStrings:DefaultConnection");
 services.AddDbContext<ApplicationDbContext>(o => o
-    .UseNpgsql(connectionString, b => b.UseNodaTime())
+    .UseNpgsql(connectionString.Get<string>(), b => b.UseNodaTime())
     .UseSnakeCaseNamingConvention()
     .EnableDetailedErrors(isDevelopment)
     .EnableSensitiveDataLogging(isDevelopment));

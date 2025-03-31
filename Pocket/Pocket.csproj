@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Cronos" Version="0.9.0" />
     <PackageReference Include="EFCore.NamingConventions" Version="9.0.0" />
     <PackageReference Include="Geralt" Version="3.3.0" />
     <PackageReference Include="MemoryPack" Version="1.21.4" />

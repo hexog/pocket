@@ -3,14 +3,18 @@ using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.EntityFrameworkCore;
 using Pocket;
 using Pocket.Application;
+using Pocket.Application.Demo;
 using Pocket.Data;
 using Pocket.Infrastructure.Routing;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.WebHost.UseStaticWebAssets();
+
 var services = builder.Services;
 var isDevelopment = builder.Environment.IsDevelopment();
+var isDemo = builder.Environment.IsDemo();
 var configuration = builder.Configuration;
 
 services.AddSerilog(o => o
@@ -37,6 +41,14 @@ services.AddAuthentication()
         o.Cookie.Name = "auth";
         o.ExpireTimeSpan = TimeSpan.FromDays(2);
     });
+
+if (isDemo)
+{
+    services.AddAuthorizationBuilder()
+        .AddDefaultPolicy("DefaultDemo", b => b.RequireAssertion(_ => true));
+
+    services.AddHostedService<DemoCleanupService>();
+}
 
 services.AddRazorPages(o =>
 {

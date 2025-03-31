@@ -15,6 +15,16 @@ public class SignIn : PageModel
     [StringLength(600, MinimumLength = 10)]
     public string? Token { get; set; }
 
+    public IActionResult OnGet([FromServices] IHostEnvironment environment)
+    {
+        if (environment.IsDemo())
+        {
+            return RedirectToPage("Index");
+        }
+
+        return Page();
+    }
+
     public IActionResult OnPost([FromServices] AccessTokenHandler accessTokenHandler)
     {
         if (!ModelState.IsValid)
